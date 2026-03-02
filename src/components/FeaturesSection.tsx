@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Easing } from "framer-motion";
 import { MapPin, Flame, MessageCircle, Trophy, Camera } from "lucide-react";
 
 const features = [
@@ -31,12 +31,17 @@ const features = [
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.12 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as Easing },
+  },
 };
 
 const FeaturesSection = () => {
@@ -63,18 +68,27 @@ const FeaturesSection = () => {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {features.map((feature) => (
             <motion.div
               key={feature.title}
               variants={item}
-              className="group relative bg-card rounded-lg p-8 shadow-card hover:shadow-primary-glow transition-all duration-500 border border-border/50 hover:border-primary/30"
+              whileHover={{
+                y: -8,
+                boxShadow: "var(--shadow-primary)",
+                transition: { duration: 0.3 },
+              }}
+              className="group relative bg-card rounded-lg p-8 shadow-card border border-border/50 hover:border-primary/30 transition-colors duration-300"
             >
-              <div className="bg-gradient-primary w-12 h-12 rounded-lg flex items-center justify-center mb-5">
+              <motion.div
+                className="bg-gradient-primary w-12 h-12 rounded-lg flex items-center justify-center mb-5"
+                whileHover={{ rotate: 8, scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <feature.icon className="w-6 h-6 text-primary-foreground" />
-              </div>
+              </motion.div>
               <h3 className="font-display text-xl font-bold text-foreground mb-3">
                 {feature.title}
               </h3>

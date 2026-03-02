@@ -70,18 +70,32 @@ const ProblemSolutionSection = () => {
                 <strong className="text-foreground">Família</strong> — e veja onde
                 a energia que você busca está concentrada naquele exato momento.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <motion.div
+                className="flex flex-wrap gap-3"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{
+                  hidden: {},
+                  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.4 } },
+                }}
+              >
                 {["🔥 Agito", "💕 Date", "👨‍👩‍👧 Família", "☕ Chill", "🎵 Música"].map(
                   (mood) => (
-                    <span
+                    <motion.span
                       key={mood}
-                      className="bg-card-gradient border border-primary/20 text-foreground px-4 py-2 rounded-full text-sm font-medium font-display"
+                      variants={{
+                        hidden: { opacity: 0, scale: 0.7 },
+                        visible: { opacity: 1, scale: 1 },
+                      }}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      className="bg-card-gradient border border-primary/20 text-foreground px-4 py-2 rounded-full text-sm font-medium font-display cursor-default"
                     >
                       {mood}
-                    </span>
+                    </motion.span>
                   )
                 )}
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
