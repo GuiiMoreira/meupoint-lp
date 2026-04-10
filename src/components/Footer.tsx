@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { MapPin, Linkedin, Instagram, Mail, MessageCircle } from "lucide-react";
 
 const socials = [
@@ -33,6 +34,18 @@ const Footer = () => {
               <s.icon className="w-5 h-5" />
             </a>
           ))}
+        </div>
+
+
+
+        <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-background/70">
+          <Link to="/politica-de-privacidade" className="hover:text-background transition-colors">
+            Política de Privacidade
+          </Link>
+          <span className="text-background/30">•</span>
+          <Link to="/termos-de-uso" className="hover:text-background transition-colors">
+            Termos de Uso
+          </Link>
         </div>
 
         <p className="text-background/40 text-sm font-body text-center">
